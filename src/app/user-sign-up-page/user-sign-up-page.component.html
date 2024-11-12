@@ -1,0 +1,51 @@
+<div class="signup-container">
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <h2>Sign Up</h2>
+      
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input 
+          type="text" 
+          id="username" 
+          formControlName="username" 
+          class="form-control"
+          placeholder="Choose username">
+        <div *ngIf="signupForm.get('username')?.touched && signupForm.get('username')?.invalid" class="error-message">
+          Username is required
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input 
+          type="password" 
+          id="password" 
+          formControlName="password" 
+          class="form-control"
+          placeholder="Choose password">
+        <div *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.invalid" class="error-message">
+          Password is required
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label>Role</label>
+        <div class="role-selection">
+          <div class="role-option" *ngFor="let role of roles">
+            <input 
+              type="radio" 
+              [id]="role" 
+              formControlName="role" 
+              [value]="role"
+              class="role-radio">
+            <label [for]="role" class="role-label">{{role}}</label>
+          </div>
+        </div>
+      </div>
+  
+      <button type="submit" [disabled]="!signupForm.valid">Sign Up</button>
+      <p class="text-center mt-3">
+        Already have an account? <a routerLink="/login">Login</a>
+      </p>
+    </form>
+  </div>
